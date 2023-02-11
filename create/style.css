@@ -1,0 +1,255 @@
+.create-link-btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.create-link-details-div {
+  background-color: hsl(212, 100%, 14%);
+  color: white;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 2px solid #808080;
+  margin: 1rem auto;
+  max-width: 90vw;
+  width: 40rem;
+  height: fit-content;
+}
+
+.create-link-details-div h3 {
+  text-align: center;
+}
+
+.download-btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.download-details-div {
+  background-color: hsl(212, 100%, 14%);
+  color: white;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 2px solid #808080;
+  margin: 1rem auto;
+  max-width: 90vw;
+  width: 40rem;
+  height: fit-content;
+}
+
+.download-details-div h3 {
+  text-align: center;
+  margin: 1rem auto;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.btn {
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 1.75rem;
+  width: 15rem;
+  margin: 2rem auto;
+  border: 2px solid black;
+  box-shadow: 1px 1px 10px 1px black;
+  color: white;
+  background-color: hsl(56, 100%, 35%);
+  font-family: "Montserrat";
+  max-width: 70vw;
+}
+
+.btn:active {
+  box-shadow: inset 1px 1px 1px 1px black;
+}
+
+.create-link-btn {
+  padding: 0.75rem;
+  font-size: 1.75rem;
+  width: 15rem;
+  margin: 2rem auto;
+  border: 2px solid black;
+  box-shadow: 1px 1px 10px 1px black;
+  color: white;
+  background-color: hsl(100, 100%, 35%);
+  font-family: "Montserrat";
+  max-width: 70vw;
+}
+
+.create-link-btn:active {
+  box-shadow: inset 1px 1px 1px 1px black;
+}
+
+.download-btn {
+  background-color: hsl(100, 100%, 35%);
+}
+
+.download-options-div {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 750px) {
+  .download-options-div {
+    flex-direction: row;
+  }
+}
+
+.download-csv-btn {
+  background-color: hsl(33, 100%, 40%);
+}
+.download-pdf-btn {
+  background-color: hsl(200, 100%, 35%);
+}
+
+.display-link-div {
+  background-color: hsl(0, 80%, 60%);
+  border: 3px solid #c0c0c0;
+  border-radius: 20px;
+  font-family: sans-serif;
+  transition: 0.2s cubic-bezier(0.1, 0.1, 0.1, 1);
+  max-width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.link-display {
+  padding: 0 0.75rem;
+  max-width: 44vw;
+}
+
+.display-link-div span {
+  font-family: "Montserrat";
+  font-weight: 900;
+}
+
+.display-link-div p {
+  color: white;
+  text-align: center;
+}
+
+.display-link-div a {
+  color: hsl(60, 100%, 50%);
+  text-decoration: underline;
+  word-wrap: break-word;
+}
+
+.copy-link-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.copy-link {
+  background-color: black;
+  width: fit-content;
+  padding: 1.75rem;
+  /* border-radius: 0 10px 10px 0; */
+  border-radius: 100%;
+  transition: 0.2s cubic-bezier(0.1, 0.1, 0.1, 1);
+  border: 3px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+#copy-icon {
+  color: white;
+  width: 25px;
+  height: 25px;
+}
+
+.create-link-attendance-link-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
+  border-radius: 10px;
+  max-height: 5rem;
+}
+
+.attendance-code-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  background-color: hsl(212, 100%, 20%);
+  max-width: fit-content;
+  border: 3px solid #c0c0c0;
+  border-radius: 10px;
+}
+
+.attendance-code-div p {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+.create-link-div {
+  background-color: hsl(212, 100%, 14%);
+  color: white;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 2px solid grey;
+  margin: 1rem auto;
+  max-width: 90vw;
+  width: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.create-link-div h3 {
+  margin: 1rem auto;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.create-link-div .create-link-attendance-link-div,
+.create-link-div .copy-link-div {
+  margin: 1rem auto;
+}
+
+.enter-link-id-div {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.text-input {
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1.25rem;
+  width: 80vw;
+  margin: 0.75rem 0;
+}
+
+#link-id-input-box {
+  border-radius: 20px;
+  font-size: 2rem;
+  max-width: 20rem;
+}
+
+.download-options-div {
+  display: none;
+}
+.download-txt-btn {
+  display: none;
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Take and Submit Attendance online">
+
+    <title>Attend List | Home</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <a href="/">
+                <h1>Attend List</h1>
+            </a>
+            <span id="tagline">Take and Submit Attendance online</span>
+            <br>
+        </header>
+
+        <main>
+            <h2>choose attendance option: </h2>
+            <br>
+            <div class="content">
+                <div class="link-div create-share-page-link-div">
+                    <a href="/create/" class="create-share-page-link btn">Create Link</a>
+                </div>
+
+                <div class="link-div submit-share-page-link-div">
+                    <a href="/submit/" class="submit-share-page-link btn">Submit Link</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© <span id="year"></span> Attend List | All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelector('#year').innerHTML = new Date().getFullYear();
+    </script>
+
+    <script src="/assets/js/script.js"></script>
+
+</body>
+
+</html>

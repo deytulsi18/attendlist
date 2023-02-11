@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Attend List | Submit </title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/submit/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <a href="/">
+                <h1>Attend List</h1>
+            </a>
+            <span id="tagline">Take and Submit Attendance online</span>
+            <br>
+        </header>
+
+        <main>
+            <h2>Attendance submission :</h2>
+            <div class="content" id="enter-link">
+                <div class="enter-link-div">
+
+                    <h2>Enter <span style="color:rgb(255, 120, 120);">LINK ID</span> : </h2>
+
+                    <div class="enter-link-id-div">
+                        <input class="text-input" type="text" id="link-id-input">
+                    </div>
+                    <div class="btn-div">
+                        <button id="enter-link-id" class="btn">ENTER</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="content">
+                <div class="submit-attendance-btn-div">
+                    <div class="submit-attendance-details-div">
+                        <h3>Enter your <span style="color:rgb(255, 120, 120);">Name</span> and <span
+                                style="color:rgb(255, 120, 120);">Roll.No.</span> to submit attendance: </h3>
+                        <div class="enter-attendance-details-div">
+                            <label for="name-input" style="color:bisque;">Enter your NAME : </label>
+                            <input class="text-input" type="text" id="name-input">
+                            <label for="roll-no-input" style="color:bisque;">Enter your ROLL NO : </label>
+                            <input class="text-input" type="text" id="roll-no-input">
+                        </div>
+                        <div class="btn-div">
+                            <button class="submit-attendance-btn btn" id="submit-attendance-btn">
+                                SUBMIT &#8593;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>© <span id="year"></span> Attend List | All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelector('#year').innerHTML = new Date().getFullYear();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/submit/script.js"></script>
+
+</body>
+
+</html>

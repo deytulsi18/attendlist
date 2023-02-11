@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attend List | Create</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/create/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <a href="/">
+                <h1>Attend List</h1>
+            </a>
+            <span id="tagline">Take and Submit Attendance online</span>
+            <br>
+        </header>
+
+        <main>
+            <h2>Create a New Link:</h2>
+            <div class="content">
+
+                <div class="create-link-btn-div">
+                    <div class="create-link-details-div">
+                        <h3>Click on the <span style="color:rgb(255, 120, 120);">START</span> button to create the link
+                            : </h3>
+                        <div class="btn-div">
+                            <button class="create-link-btn btn" id="create-link-id">
+                                START &#8593;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="create-link-div">
+                    <h3> Attendance submission link and <span style="color:rgb(255, 120, 120);">LINK ID</span> will
+                        appear here:
+                    </h3>
+                    <div class="create-link-attendance-link-div">
+                        <div class="display-link-div">
+                            <div class="link-display">
+                                <p><span>Link : </span> <a href="#" target="_blank" id="attendance-link">your
+                                        attendance link will appear here </a>
+                                </p>
+                            </div>
+                            <div class="copy-link-div" onclick="copyToClipboard()">
+                                <div class="copy-link">
+                                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="link"
+                                        id="copy-icon" width="35px" role="img" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 512 512">
+                                        <path fill="currentColor"
+                                            d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="attendance-code-div">
+                        <p><span style="color:rgb(255, 120, 120);">LINK ID</span>&nbsp;:&nbsp;</p>
+                        <p id="attendance-code">??????</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h2 style="font-size: 2rem;">OR</h2>
+            <br>
+            <h2>Download a pre-exisiting attendance data :</h2>
+            <div class="content">
+                <div class="download-btn-div">
+                    <div class="download-details-div">
+                        <h3>If you have a <span style="color:rgb(255, 120, 120);">LINK ID</span>, enter the <span
+                                style="color:rgb(255, 120, 120);">LINK ID</span> and click on the <span
+                                style="color:rgb(255, 120, 120);">Download</span> button to download the attendance data
+                            : </h3>
+                        <div class="enter-link-id-div">
+                            <input class="text-input" type="text" id="link-id-input-box">
+                        </div>
+                        <div class="btn-div">
+                            <button class="download-btn btn" id="download-attendance">
+                                Download &#8595;
+                            </button>
+                            <a class="download-txt-btn btn" id="download-txt" href="#" target="_blank">
+                                Download <br>TXT
+                            </a>
+                            <div class="download-options-div">
+                                <button class="download-csv-btn btn" id="download-csv">
+                                    Download <br>CSV
+                                </button>
+                                <button class="download-pdf-btn btn" id="download-pdf">
+                                    Download <br>PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© <span id="year"></span> Attend List | All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Setting date for footer
+        document.querySelector('#year').innerHTML = new Date().getFullYear();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/create/script.js"></script>
+
+</body>
+
+</html>

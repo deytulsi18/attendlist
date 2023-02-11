@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        let myData = [
+            {
+                "link_id": "406559",
+                "name": "a",
+                "roll_no": "jhgfd",
+                "timestamp": "Sat Feb 11 2023 16:11:21 GMT+0530 (India Standard Time)"
+            },
+            {
+                "link_id": "406559",
+                "name": "b",
+                "roll_no": "jhgfd",
+                "timestamp": "Sat Feb 11 2023 16:11:21 GMT+0530 (India Standard Time)"
+            },
+            {
+                "link_id": "406559",
+                "name": "c",
+                "roll_no": "jhgfd",
+                "timestamp": "Sat Feb 11 2023 16:11:21 GMT+0530 (India Standard Time)"
+            },
+            {
+                "link_id": "406559",
+                "name": "d",
+                "roll_no": "jhgfd",
+                "timestamp": "Sat Feb 11 2023 16:11:21 GMT+0530 (India Standard Time)"
+            }
+        ];
+        let downloadTXT = (jsonData, fileName, contentType) => {
+            // jsonData = JSON.stringify(jsonData);
+
+            console.log(jsonData.name)
+
+            let content = "";
+
+            jsonData.forEach(elem => {
+                content += `\nName : ${elem.name}, Roll No : ${elem.roll_no}, timestamp : ${elem.timestamp}, LINK ID : ${elem.link_id}`;
+            });
+
+            // console.log(content);
+
+            let a = document.createElement("a");
+            let file = new Blob([content], { type: contentType });
+            a.href = URL.createObjectURL(file);
+            a.download = fileName;
+            a.click();
+        }
+        // downloadTXT(myData, 'resultText.txt', 'text/plain');
+    </script>
+</body>
+
+</html>
