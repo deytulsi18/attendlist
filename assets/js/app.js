@@ -2,10 +2,10 @@ const faunadb = window.faunadb
 const q = faunadb.query
 
 const client = new faunadb.Client({
-    secret: "fnAE8gGplTACWZvLTX3vHizzvJfh_L6ogpyWyqLS",
-    domain: 'db.fauna.com',
-    scheme: 'https',
-})
+    secret: env.secret,
+    domain: env.domain,
+    scheme: env.scheme,
+});
 
 // Create a new LINK ID (Create a new Collection)
 const createLinkID = async (link_id) => {
