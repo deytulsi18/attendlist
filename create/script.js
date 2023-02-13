@@ -32,12 +32,21 @@ const linkIdInput = document.querySelector("#link-id-input-box");
 
 downloadAttendanceBtn.addEventListener("click", () => {
     try {
-        let linkId = linkIdInput.value;
-        if (linkId == "") {
-            throw 'Enter LINK ID';
+        if ((userIsSignedIn && userEmail != '')) {
+            let linkId = linkIdInput.value;
+            if (linkId == "") {
+                throw 'Enter LINK ID';
+            }
+            downloadAttendanceData(linkId);
+        } else {
+            Swal.fire({
+                icon: 'info',
+                confirmButtonColor: '#1f74b6',
+                confirmButtonText: 'OK',
+                title: 'You are not Signed In!',
+                text: 'You need to sign in to use this page.'
+            });
         }
-
-        downloadAttendanceData(linkId);
     } catch (err) {
         console.log(err);
         Swal.fire({
@@ -53,18 +62,34 @@ downloadAttendanceBtn.addEventListener("click", () => {
 const createAttendanceLinkIDBtn = document.querySelector("#create-link-id")
 
 createAttendanceLinkIDBtn.addEventListener("click", () => {
-    createAttendanceLinkIDBtn.style.pointerEvents = "none";
+    if (userIsSignedIn && userEmail != '') {
+        createAttendanceLinkIDBtn.style.pointerEvents = "none";
 
-    generateLinkID();
+        generateLinkID();
+    } else {
+        Swal.fire({
+            icon: 'info',
+            confirmButtonColor: '#1f74b6',
+            confirmButtonText: 'OK',
+            title: 'You are not Signed In!',
+            text: 'You need to sign in to use this page.'
+        });
+    }
 });
 
 let generateLinkID = async () => {
     try {
 
-        let number = Math.floor(100000 + Math.random() * 900000);
+        // let randNumb = Math.floor(100000 + Math.random() * 900000);
+
+        alphabet = '0123456789abcdefghijklmnopqrstuvwxyz';
+        nanoid = customAlphabet(alphabet, 6);
+
+        const number = nanoid();
+
         let generatedId = number.toString();
 
-        await createLinkID(generatedId);
+        await createLinkID(generatedId, userEmail);
 
         let linkId = generatedId;
         let attendanceLink = document.querySelector("#attendance-link");
@@ -107,12 +132,27 @@ let generateLinkID = async () => {
 
 let downloadAttendanceData = async (linkId) => {
     try {
-        let res = await fetchAttendanceUnderLinkID(linkId);
 
-        downloadTXT(res, `attendance-${linkId}.txt`, 'text/plain');
-        // downloadOptionsDiv.style.display = "flex";
-        downloadTXTBtn.style.display = "flex";
-        downloadAttendanceBtn.style.display = "none";
+        if (linkId == 'link_ids') {
+            throw 'This LINK ID does not exist!';
+        }
+
+        const response = await fetchIndex('link_ids_by_email', 'abc123');
+
+        if (response === undefined) {
+            throw 'This LINK ID does not exist!'
+        } else if (response.email == userEmail) {
+
+            let res = await fetchAttendanceUnderLinkID(linkId);
+
+            downloadTXT(res, `attendance-${linkId}.txt`, 'text/plain');
+            // downloadOptionsDiv.style.display = "flex";
+            downloadTXTBtn.style.display = "flex";
+            downloadAttendanceBtn.style.display = "none";
+        }
+        else {
+            throw "This LINK ID does not belong to you!"
+        }
     } catch (err) {
         console.log(err);
         Swal.fire({

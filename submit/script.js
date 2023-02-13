@@ -33,6 +33,7 @@ enterLinkIDBtn.addEventListener("click", () => {
 });
 
 submitAttendanceBtn.addEventListener("click", () => {
+    submitAttendanceBtn.style.pointerEvents = "none";
     submitAttendance();
 });
 
@@ -42,15 +43,19 @@ let submitAttendance = async () => {
         let name = nameInput.value;
         let rollNo = rollNoInput.value;
 
-        if (linkId == "") {
-            throw 'Enter LINK ID';
-        }
-        else if (name == "" || rollNo == "") {
-            throw 'Enter all fields';
+        try {
+            if (linkId == "") {
+                throw 'Enter LINK ID';
+            }
+            else if (name == "" || rollNo == "") {
+                throw 'Enter all fields';
+            }
+        } catch (err) {
+            throw err;
         }
 
         let timestamp = getTimeStamp();
-        
+
 
         let userData = {
             linkId: linkId,
@@ -81,7 +86,9 @@ let submitAttendance = async () => {
             confirmButtonText: 'OK',
             title: 'Something went wrong!',
             text: `${err}`
-        });
+        }).then(() => {
+            submitAttendanceBtn.style.pointerEvents = "auto";
+        })
     }
 }
 
@@ -91,10 +98,9 @@ let getTimeStamp = () => {
     let dt = new Date();
     let currentDate = dt.toLocaleDateString();
     let currentTime = dt.toLocaleTimeString();
-    
+
     let res = `${currentDate} ${currentTime}`;
     res = res.replace(' ', ' ');
-    console.log(res);
 
     return res;
 }

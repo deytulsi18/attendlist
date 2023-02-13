@@ -1,3 +1,6 @@
+
+//****** fauna db ******/ 
+
 const faunadb = window.faunadb
 const q = faunadb.query
 
@@ -40,7 +43,7 @@ const addAttendanceUnderLinkID = async (link_id, attendance_data) => {
     )
         .catch((err) => {
             console.log(err)
-            throw "Error Occured! Check The LINK ID maybe.";
+            throw "log Occured! Check The LINK ID maybe.";
         })
 
     //*** Do Something ***/
@@ -65,7 +68,10 @@ const deleteLinkID = async (link_id) => {
 
 // Fetch all the attendance present under a specific LINK ID (Read all the documents in a specific Collection)
 const fetchAttendanceUnderLinkID = async (link_id) => {
-    var attendancesUnderLinkID = await client.query(
+    if (link_id == 'link_ids') {
+        throw 'This LINK ID is not available!';
+    }
+    let attendancesUnderLinkID = await client.query(
         q.Map(
             q.Paginate(q.Documents(q.Collection(`${link_id}`)), { size: 250 }),
             q.Lambda('ref', q.Get(q.Var('ref')))
@@ -74,10 +80,24 @@ const fetchAttendanceUnderLinkID = async (link_id) => {
         .then((res) => res.data)
         .catch((err) => {
             console.log(err)
-            throw "Error Occured! Check The LINK ID maybe.";
+            throw "log Occured! Check The LINK ID maybe.";
         })
 
     //*** Do Something ***/
     // console.log(attendancesUnderLinkID);
     return attendancesUnderLinkID;
 }
+
+//
+const fetchIndex = async (indexName, link_id) => {
+    let res = client.query(
+        q.Get(q.Match(
+            q.Index(indexName),
+            link_id
+        ))
+    )
+        .then((ret) => ret.data)
+        .catch((err) => console.log(err))
+
+    return res;
+};

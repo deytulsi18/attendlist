@@ -23,6 +23,19 @@
             <br>
         </header>
 
+        <div class="auth-div">
+            <div class="auth-status-div">
+                <div class="auth-status-img">
+                    <img src="https://avatars.dicebear.com/api/gridy/random.svg" alt="user-avatar" id="user-avatar">
+                </div>
+                <div class="auth-status-text">
+                    <p id="user-name">Not Signed In!</p>
+                    <p id="user-email">No email found!</p>
+                </div>
+            </div>
+            <button class="auth-btn" id="quickstart-sign-in">SIGN IN</button>
+        </div>
+
         <main>
             <h2>Create a New Link:</h2>
             <div class="content">
@@ -112,9 +125,15 @@
         // Setting date for footer
         document.querySelector('#year').innerHTML = new Date().getFullYear();
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
     <script src="/assets/js/config.js"></script>
+    <script src="/assets/js/firebase-auth.js"></script>
+    <script src="/assets/js/nanoid.js"></script>
     <script src="/assets/js/app.js"></script>
     <script src="/create/script.js"></script>
 
