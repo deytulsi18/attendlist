@@ -33,7 +33,7 @@ const addAttendanceUnderLinkID = async (link_id, attendance_data) => {
             q.Collection(`${link_id}`),
             {
                 data: {
-                    link_id: attendance_data.linkId,
+                    // link_id: attendance_data.linkId,
                     name: attendance_data.name,
                     roll_no: attendance_data.rollNo,
                     timestamp: attendance_data.timestamp
@@ -43,7 +43,28 @@ const addAttendanceUnderLinkID = async (link_id, attendance_data) => {
     )
         .catch((err) => {
             console.log(err)
-            throw "log Occured! Check The LINK ID maybe.";
+            throw "Error Occured! Check The LINK ID maybe.";
+        })
+
+    //*** Do Something ***/
+    // location.reload();
+}
+
+const addNewLinkIDWithUid = async (link_id, uid, timestamp) => {
+    await client.query(
+        q.Create(
+            q.Collection(`link_ids`),
+            {
+                data: {
+                    link_id: link_id,
+                    uid: uid,
+                    timestamp: timestamp
+                }
+            }
+        )
+    )
+        .catch((err) => {
+            console.log(err)
         })
 
     //*** Do Something ***/
@@ -80,7 +101,7 @@ const fetchAttendanceUnderLinkID = async (link_id) => {
         .then((res) => res.data)
         .catch((err) => {
             console.log(err)
-            throw "log Occured! Check The LINK ID maybe.";
+            throw "Error Occured! Check The LINK ID maybe.";
         })
 
     //*** Do Something ***/

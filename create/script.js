@@ -32,7 +32,7 @@ const linkIdInput = document.querySelector("#link-id-input-box");
 
 downloadAttendanceBtn.addEventListener("click", () => {
     try {
-        if ((userIsSignedIn && userEmail != '')) {
+        if ((userIsSignedIn && userID != '')) {
             let linkId = linkIdInput.value;
             if (linkId == "") {
                 throw 'Enter LINK ID';
@@ -62,7 +62,7 @@ downloadAttendanceBtn.addEventListener("click", () => {
 const createAttendanceLinkIDBtn = document.querySelector("#create-link-id")
 
 createAttendanceLinkIDBtn.addEventListener("click", () => {
-    if (userIsSignedIn && userEmail != '') {
+    if (userIsSignedIn && userID != '') {
         createAttendanceLinkIDBtn.style.pointerEvents = "none";
 
         generateLinkID();
@@ -89,7 +89,8 @@ let generateLinkID = async () => {
 
         let generatedId = number.toString();
 
-        await createLinkID(generatedId, userEmail);
+        await createLinkID(generatedId);
+        await addNewLinkIDWithUid(generatedId, userID, getTimeStamp());
 
         let linkId = generatedId;
         let attendanceLink = document.querySelector("#attendance-link");
@@ -137,11 +138,11 @@ let downloadAttendanceData = async (linkId) => {
             throw 'This LINK ID does not exist!';
         }
 
-        const response = await fetchIndex('link_ids_by_email', 'abc123');
+        const response = await fetchIndex('link_ids_by_link_id', linkId);
 
         if (response === undefined) {
             throw 'This LINK ID does not exist!'
-        } else if (response.email == userEmail) {
+        } else if (response.uid == userID) {
 
             let res = await fetchAttendanceUnderLinkID(linkId);
 
@@ -178,4 +179,17 @@ let downloadTXT = (jsonData, fileName, contentType) => {
     let file = new Blob([content], { type: contentType });
     downloadTXTBtn.href = URL.createObjectURL(file);
     downloadTXTBtn.download = fileName;
+}
+
+// function to get timestamp
+
+let getTimeStamp = () => {
+    let dt = new Date();
+    let currentDate = dt.toLocaleDateString();
+    let currentTime = dt.toLocaleTimeString();
+
+    let res = `${currentDate} ${currentTime}`;
+    res = res.replace(' ', ' ');
+
+    return res;
 }

@@ -274,7 +274,7 @@
 }
 #user-avatar {
   max-width: 4rem;
-  border-radius: 10px;
+  border-radius: 50%;
   background-color: #222;
   padding: 0.2rem;
 }

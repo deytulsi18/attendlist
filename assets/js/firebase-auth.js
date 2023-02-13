@@ -2,6 +2,7 @@
 
 let userIsSignedIn = false;
 let userEmail = ``;
+let userID = ``;
 
 firebase.initializeApp(firebaseConfig);
 
@@ -60,6 +61,7 @@ const initApp = () => {
 
             userIsSignedIn = true;
             userEmail = `${user.email}`;
+            userID = `${user.uid}`;
         } else {
             createAttendanceLinkIDBtn.style.pointerEvents = 'auto';
             // console.log("Not Signed In");
