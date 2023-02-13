@@ -27,7 +27,10 @@ const copyToClipboard = () => {
 
 const downloadAttendanceBtn = document.querySelector("#download-attendance");
 const downloadTXTBtn = document.querySelector("#download-txt");
+const downloadPDFBtn = document.querySelector("#download-pdf");
+const deleteBtn = document.querySelector("#delete-btn");
 const downloadOptionsDiv = document.querySelector(".download-options-div");
+const deleteOptionsDiv = document.querySelector(".delete-options-div");
 const linkIdInput = document.querySelector("#link-id-input-box");
 
 downloadAttendanceBtn.addEventListener("click", () => {
@@ -146,9 +149,10 @@ let downloadAttendanceData = async (linkId) => {
 
             let res = await fetchAttendanceUnderLinkID(linkId);
 
-            downloadTXT(res, `attendance-${linkId}.txt`, 'text/plain');
-            // downloadOptionsDiv.style.display = "flex";
-            downloadTXTBtn.style.display = "flex";
+            prepareDownload(res, linkId);
+            downloadOptionsDiv.style.display = "flex";
+            deleteOptionsDiv.style.display = "flex";
+            downloadAttendanceBtn.style.pointerEvents = "none";
             downloadAttendanceBtn.style.display = "none";
         }
         else {
@@ -166,20 +170,106 @@ let downloadAttendanceData = async (linkId) => {
     }
 };
 
-// Download the attendance in a txt file
-let downloadTXT = (jsonData, fileName, contentType) => {
+// Download the attendance in a txt file or a pdf file
+let prepareDownload = (jsonData, linkId) => {
+
+    // txt file generation
+    const fileName = `attendance-${linkId}.txt`;
+
     let content = "";
 
-    content += `\n[Roll No], [Name], [timestamp]`;
+    content += `Download Timestamp: ${getTimeStamp()}\n\n[Roll No], [Name], [timestamp]\n`;
 
     jsonData.forEach(elem => {
         content += `\n${elem.data.roll_no}, ${elem.data.name}, ${elem.data.timestamp}`;
     });
 
-    let file = new Blob([content], { type: contentType });
+    let file = new Blob([content], { type: 'text/plain' });
     downloadTXTBtn.href = URL.createObjectURL(file);
     downloadTXTBtn.download = fileName;
+    
+    // pdf file generation
+    downloadPDFBtn.addEventListener("click", () => {
+        const doc = new jsPDF()
+        doc.text(`${content}`, 10, 10);
+        doc.save(`attendance-${linkId}.pdf`);
+    })
 }
+
+//delete button for LINK ID deletion
+deleteOptionsDiv.addEventListener("click", () => {
+    try {
+        if ((userIsSignedIn && userID != '')) {
+            let linkId = linkIdInput.value;
+            if (linkId == "") {
+                throw 'Enter LINK ID';
+            }
+            deleteAttendanceData(linkId);
+        } else {
+            Swal.fire({
+                icon: 'info',
+                confirmButtonColor: '#1f74b6',
+                confirmButtonText: 'OK',
+                title: 'You are not Signed In!',
+                text: 'You need to sign in to use this page.'
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        Swal.fire({
+            icon: 'warning',
+            confirmButtonColor: '#ffa333',
+            confirmButtonText: 'OK',
+            title: 'Something went wrong!',
+            text: `${err}`
+        });
+    }
+});
+
+let deleteAttendanceData = async (linkId) => {
+    try {
+
+        if (linkId == 'link_ids') {
+            throw 'This LINK ID does not exist!';
+        }
+
+        const response = await fetchIndex('link_ids_by_link_id', linkId);
+
+        if (response === undefined) {
+            throw 'This LINK ID does not exist!'
+        } else if (response.uid == userID) {
+
+            await deleteLinkID(linkId);
+
+            deleteBtn.style.pointerEvents = "none";
+            deleteBtn.style.display = "none";
+
+            setTimeout(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Attendance Data Deleted!',
+                    text: 'The attendance has been deleted!',
+                    confirmButtonAriaLabel: 'Thumbs up, OK!',
+                    confirmButtonColor: '#3bb300'
+                }).then(() => {
+                    window.location.replace("/");
+                });
+            }, 350);
+        }
+        else {
+            throw "This LINK ID does not belong to you!"
+        }
+    } catch (err) {
+        console.log(err);
+        Swal.fire({
+            icon: 'warning',
+            confirmButtonColor: '#ffa333',
+            confirmButtonText: 'OK',
+            title: 'Something went wrong!',
+            text: `${err}`
+        });
+    }
+};
 
 // function to get timestamp
 

@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/assets/img/icon-img.png" id="icon">
+
+
     <title>Attend List | Create</title>
 
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -42,11 +46,11 @@
 
                 <div class="create-link-btn-div">
                     <div class="create-link-details-div">
-                        <h3>Click on the <span style="color:rgb(255, 120, 120);">START</span> button to create the link
+                        <h3>Click on the <span style="color:rgb(255, 120, 120);">CREATE</span> button to create the link
                             : </h3>
                         <div class="btn-div">
                             <button class="create-link-btn btn" id="create-link-id">
-                                START &#8593;
+                                CREATE &#8593;
                             </button>
                         </div>
                     </div>
@@ -99,15 +103,17 @@
                             <button class="download-btn btn" id="download-attendance">
                                 Download &#8595;
                             </button>
-                            <a class="download-txt-btn btn" id="download-txt" href="#" target="_blank">
-                                Download <br>TXT
-                            </a>
                             <div class="download-options-div">
-                                <button class="download-csv-btn btn" id="download-csv">
-                                    Download <br>CSV
-                                </button>
+                                <a class="download-txt-btn btn" id="download-txt" href="#" target="_blank">
+                                    Download <br>TXT
+                                </a>
                                 <button class="download-pdf-btn btn" id="download-pdf">
                                     Download <br>PDF
+                                </button>
+                            </div>
+                            <div class="delete-options-div">
+                                <button class="delete-btn btn" id="delete-btn">
+                                    DELETE
                                 </button>
                             </div>
                         </div>
@@ -130,6 +136,10 @@
     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    <script src="
+    https://cdn.jsdelivr.net/npm/iu-jspdf@1.3.4/dist/jspdf.debug.min.js
+    "></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
     <script src="/assets/js/config.js"></script>
     <script src="/assets/js/firebase-auth.js"></script>

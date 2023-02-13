@@ -60,12 +60,13 @@
   box-shadow: 1px 1px 10px 1px black;
   color: white;
   background-color: hsl(56, 100%, 35%);
+  background-color: hsl(30, 80%, 48%);
   font-family: "Montserrat";
   max-width: 70vw;
 }
 
 .btn:active {
-  box-shadow: inset 1px 1px 1px 1px black;
+  box-shadow: inset 1px 1px 10px 1px hsla(0, 0%, 0%, 50%);
 }
 
 .create-link-btn {
@@ -82,13 +83,16 @@
 }
 
 .create-link-btn:active {
-  box-shadow: inset 1px 1px 1px 1px black;
+  box-shadow: inset 1px 1px 10px 1px black;
 }
 
 .download-btn {
   background-color: hsl(100, 100%, 35%);
 }
-
+.delete-btn {
+  background-color: hsl(0, 66%, 48%);
+  padding: 1.5rem 1rem;
+}
 .download-options-div {
   display: flex;
   flex-direction: column;
@@ -250,12 +254,14 @@
 .download-options-div {
   display: none;
 }
-.download-txt-btn {
+.delete-options-div {
   display: none;
 }
 
 .auth-div {
-  background-color: hsla(200, 100%, 50%, 0.5);
+  background-color: hsla(214, 60%, 50%);
+  background-color: hsla(180, 100%, 30%);
+  /* background-color: hsl(30, 100%, 80%); */
   display: flex;
   justify-content: space-between;
   align-items: center;
