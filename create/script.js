@@ -39,7 +39,9 @@ let userLongitude = 0;
 let userLocationDataFetched = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    getLocation();
+    setTimeout(() => {
+        getLocation();
+    }, 500);
 });
 
 downloadAttendanceBtn.addEventListener("click", () => {
