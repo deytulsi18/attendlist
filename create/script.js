@@ -34,6 +34,10 @@ const deleteOptionsDiv = document.querySelector(".delete-options-div");
 const downloadDivNoteInfo = document.querySelector(".download-div-note-info");
 const linkIdInput = document.querySelector("#link-id-input-box");
 
+let userLatitude = 0;
+let userLongitude = 0;
+let userLocationDataFetched = false;
+
 downloadAttendanceBtn.addEventListener("click", () => {
     try {
         if ((userIsSignedIn && userID != '')) {
@@ -69,7 +73,15 @@ createAttendanceLinkIDBtn.addEventListener("click", () => {
     if (userIsSignedIn && userID != '') {
         createAttendanceLinkIDBtn.style.pointerEvents = "none";
 
-        generateLinkID();
+        getLocation();
+
+        if (userLocationDataFetched) {
+            generateLinkID();
+        } else {
+            setTimeout(() => {
+                generateLinkID();
+            }, 500);
+        }
     } else {
         Swal.fire({
             icon: 'info',
@@ -93,8 +105,11 @@ let generateLinkID = async () => {
 
         let generatedId = number.toString();
 
+        // console.log(userLatitude);
+        // console.log(userLongitude);
+
         await createLinkID(generatedId);
-        await addNewLinkIDWithUid(generatedId, userID, getTimeStamp());
+        await addNewLinkIDWithUid(generatedId, userID, getTimeStamp(), userLatitude, userLongitude);
 
         let linkId = generatedId;
         let attendanceLink = document.querySelector("#attendance-link");
@@ -189,7 +204,7 @@ let prepareDownload = (jsonData, linkId) => {
     let file = new Blob([content], { type: 'text/plain' });
     downloadTXTBtn.href = URL.createObjectURL(file);
     downloadTXTBtn.download = fileName;
-    
+
     // pdf file generation
     downloadPDFBtn.addEventListener("click", () => {
         const doc = new jsPDF()
@@ -199,13 +214,14 @@ let prepareDownload = (jsonData, linkId) => {
 }
 
 //delete button for LINK ID deletion
-deleteOptionsDiv.addEventListener("click", () => {
+deleteBtn.addEventListener("click", () => {
     try {
         if ((userIsSignedIn && userID != '')) {
             let linkId = linkIdInput.value;
             if (linkId == "") {
                 throw 'Enter LINK ID';
             }
+            deleteBtn.style.pointerEvents = "none";
             deleteAttendanceData(linkId);
         } else {
             Swal.fire({
@@ -242,6 +258,7 @@ let deleteAttendanceData = async (linkId) => {
         } else if (response.uid == userID) {
 
             await deleteLinkID(linkId);
+            await deleteLinkIDUserDoc(linkId);
 
             deleteBtn.style.pointerEvents = "none";
             deleteBtn.style.display = "none";
@@ -269,7 +286,9 @@ let deleteAttendanceData = async (linkId) => {
             confirmButtonText: 'OK',
             title: 'Something went wrong!',
             text: `${err}`
-        });
+        }).then(() => {
+            deleteBtn.style.pointerEvents = "auto";
+        })
     }
 };
 

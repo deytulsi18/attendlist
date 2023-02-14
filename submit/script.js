@@ -5,21 +5,31 @@ const linkIdInput = document.querySelector("#link-id-input");
 const nameInput = document.querySelector("#name-input");
 const rollNoInput = document.querySelector("#roll-no-input");
 
+let userLatitude = 0;
+let userLongitude = 0;
+let userLocationDataFetched = false;
+
 // If a LINK ID is passed thought page link query parameter it is placed in LINK ID input
 
-const linkIdInQueryParams = new URLSearchParams(window.location.search).get('id');
+window.onload = (event) => {
+    const linkIdInQueryParams = new URLSearchParams(window.location.search).get('id');
 
-linkIdInput.value = linkIdInQueryParams;
+    linkIdInput.value = linkIdInQueryParams;
+};
 
-//
+// enter link Id to submit attendance
 enterLinkIDBtn.addEventListener("click", () => {
     try {
         let linkId = linkIdInput.value;
         if (linkId == "") {
             throw 'Enter LINK ID';
         }
+
+        getLocation();
+
         submitAttendanceDiv.style.display = "flex";
         enterLinkIDBtn.style.display = "none";
+
     } catch (err) {
         console.log(err);
         Swal.fire({
@@ -34,7 +44,14 @@ enterLinkIDBtn.addEventListener("click", () => {
 
 submitAttendanceBtn.addEventListener("click", () => {
     submitAttendanceBtn.style.pointerEvents = "none";
-    submitAttendance();
+
+    if (userLocationDataFetched) {
+        submitAttendance();
+    } else {
+        setTimeout(() => {
+            submitAttendance();
+        }, 500);
+    }
 });
 
 let submitAttendance = async () => {
@@ -56,15 +73,34 @@ let submitAttendance = async () => {
 
         let timestamp = getTimeStamp();
 
-
         let userData = {
             linkId: linkId,
             name: name,
             rollNo: rollNo,
-            timestamp: timestamp.toString()
+            timestamp: timestamp.toString(),
+            latitude: userLatitude,
+            longitude: userLongitude
         };
 
-        await addAttendanceUnderLinkID(linkId, userData);
+        let res = await fetchIndex('link_ids_by_link_id', linkId);
+        
+        if (res.name == 'NotFound') {
+            throw `LINK ID does not exist!`;
+        }
+
+        const hostLatitude = res.latitude;
+        const hostLongitude = res.longitude;
+
+        const distanceBetweenUserAndHostInKM = distance(userLatitude, userLongitude, hostLatitude, hostLongitude, "K");
+        const distanceBetweenUserAndHostInM = Math.round((distanceBetweenUserAndHostInKM * 1000) * 1000) / 1000;
+
+        if (distanceBetweenUserAndHostInM <= 25) {
+            await addAttendanceUnderLinkID(linkId, userData);
+        }
+        else {
+            throw "You are not in the class!";
+        }
+
 
         setTimeout(() => {
             Swal.fire({

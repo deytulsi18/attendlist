@@ -50,7 +50,7 @@ const addAttendanceUnderLinkID = async (link_id, attendance_data) => {
     // location.reload();
 }
 
-const addNewLinkIDWithUid = async (link_id, uid, timestamp) => {
+const addNewLinkIDWithUid = async (link_id, uid, timestamp, userLatitude, userLongitude) => {
     await client.query(
         q.Create(
             q.Collection(`link_ids`),
@@ -58,7 +58,9 @@ const addNewLinkIDWithUid = async (link_id, uid, timestamp) => {
                 data: {
                     link_id: link_id,
                     uid: uid,
-                    timestamp: timestamp
+                    timestamp: timestamp,
+                    latitude: userLatitude,
+                    longitude: userLongitude
                 }
             }
         )
@@ -109,16 +111,41 @@ const fetchAttendanceUnderLinkID = async (link_id) => {
     return attendancesUnderLinkID;
 }
 
+
 //
 const fetchIndex = async (indexName, link_id) => {
-    let res = client.query(
+    let res = await client.query(
         q.Get(q.Match(
             q.Index(indexName),
             link_id
         ))
     )
         .then((ret) => ret.data)
-        .catch((err) => console.log(err))
+        .catch((err) => {
+            console.log(err)
+            return err;
+        })
 
     return res;
+};
+
+// Delete an existing LINK ID (Delete an existing Document in a Collection)
+
+const deleteLinkIDUserDoc = async (link_id) => {
+    let res = await client.query(
+        q.Get(q.Match(
+            q.Index('link_ids_by_link_id'),
+            link_id
+        ))
+    )
+        .then((ret) => ret)
+        .catch((err) => console.log(err))
+    console.log(res)
+
+    const refId = res.ref.id;
+
+    client.query(
+        q.Delete(q.Ref(q.Collection('link_ids'), refId))
+    )
+        .catch((err) => console.error(err))
 };
