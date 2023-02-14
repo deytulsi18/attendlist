@@ -38,10 +38,9 @@ let userLatitude = 0;
 let userLongitude = 0;
 let userLocationDataFetched = false;
 
-window.onload = () => {
-    initAuth();
+document.addEventListener('DOMContentLoaded', () => {
     getLocation();
-};
+});
 
 downloadAttendanceBtn.addEventListener("click", () => {
     try {

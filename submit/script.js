@@ -11,11 +11,11 @@ let userLocationDataFetched = false;
 
 // If a LINK ID is passed thought page link query parameter it is placed in LINK ID input
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', () => {
     const linkIdInQueryParams = new URLSearchParams(window.location.search).get('id');
 
     linkIdInput.value = linkIdInQueryParams;
-};
+});
 
 // enter link Id to submit attendance
 enterLinkIDBtn.addEventListener("click", () => {

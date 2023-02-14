@@ -80,6 +80,6 @@ const initAuth = () => {
     document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignInWIthPopup, false);
 }
 
-// window.onload = () => {
-//     initAuth();
-// };
+window.onload = () => {
+    initAuth();
+};
