@@ -36,7 +36,7 @@ function toggleSignInWIthPopup() {
     document.getElementById('quickstart-sign-in').disabled = true;
 }
 
-const initApp = () => {
+const initAuth = () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             const userDetailsString =
@@ -80,6 +80,6 @@ const initApp = () => {
     document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignInWIthPopup, false);
 }
 
-window.onload = () => {
-    initApp();
-};
+// window.onload = () => {
+//     initAuth();
+// };

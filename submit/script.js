@@ -11,7 +11,7 @@ let userLocationDataFetched = false;
 
 // If a LINK ID is passed thought page link query parameter it is placed in LINK ID input
 
-window.onload = (event) => {
+window.onload = () => {
     const linkIdInQueryParams = new URLSearchParams(window.location.search).get('id');
 
     linkIdInput.value = linkIdInQueryParams;
@@ -43,14 +43,23 @@ enterLinkIDBtn.addEventListener("click", () => {
 });
 
 submitAttendanceBtn.addEventListener("click", () => {
-    submitAttendanceBtn.style.pointerEvents = "none";
+    try {
+        submitAttendanceBtn.style.pointerEvents = "none";
 
-    if (userLocationDataFetched) {
-        submitAttendance();
-    } else {
-        setTimeout(() => {
+        if (userLocationDataFetched) {
             submitAttendance();
-        }, 500);
+        } else {
+            throw "Allow LOCATION access or try refershing the page!";
+        }
+    } catch (err) {
+        console.log(err);
+        Swal.fire({
+            icon: 'warning',
+            confirmButtonColor: '#ffa333',
+            confirmButtonText: 'OK',
+            title: 'Something went wrong!',
+            text: `${err}`
+        });
     }
 });
 

@@ -31,12 +31,17 @@ const downloadPDFBtn = document.querySelector("#download-pdf");
 const deleteBtn = document.querySelector("#delete-btn");
 const downloadOptionsDiv = document.querySelector(".download-options-div");
 const deleteOptionsDiv = document.querySelector(".delete-options-div");
-const downloadDivNoteInfo = document.querySelector(".download-div-note-info");
+// const downloadDivNoteInfo = document.querySelector(".download-div-note-info");
 const linkIdInput = document.querySelector("#link-id-input-box");
 
 let userLatitude = 0;
 let userLongitude = 0;
 let userLocationDataFetched = false;
+
+window.onload = () => {
+    initAuth();
+    getLocation();
+};
 
 downloadAttendanceBtn.addEventListener("click", () => {
     try {
@@ -73,14 +78,25 @@ createAttendanceLinkIDBtn.addEventListener("click", () => {
     if (userIsSignedIn && userID != '') {
         createAttendanceLinkIDBtn.style.pointerEvents = "none";
 
-        getLocation();
-
-        if (userLocationDataFetched) {
-            generateLinkID();
-        } else {
-            setTimeout(() => {
+        try {
+            if (userLocationDataFetched) {
                 generateLinkID();
-            }, 500);
+            } else {
+                throw "Allow LOCATION access or try refershing the page!";
+            }
+        } catch (err) {
+            console.log(err);
+            Swal.fire({
+                icon: 'warning',
+                confirmButtonColor: '#ffa333',
+                confirmButtonText: 'OK',
+                title: 'Something went wrong!',
+                text: `${err}`
+            })
+                .then(() => {
+                    createAttendanceLinkIDBtn.style.pointerEvents = "auto";
+
+                })
         }
     } else {
         Swal.fire({
@@ -169,12 +185,12 @@ let downloadAttendanceData = async (linkId) => {
             prepareDownload(res, linkId);
             downloadOptionsDiv.style.display = "flex";
             deleteOptionsDiv.style.display = "flex";
-            downloadDivNoteInfo.style.display = "flex";
+            // downloadDivNoteInfo.style.display = "flex";
             downloadAttendanceBtn.style.pointerEvents = "none";
             downloadAttendanceBtn.style.display = "none";
         }
         else {
-            throw "This LINK ID does not belong to you!"
+            throw "This LINK ID does not belong to you or does not exist!"
         }
     } catch (err) {
         console.log(err);
@@ -277,7 +293,7 @@ let deleteAttendanceData = async (linkId) => {
             }, 350);
         }
         else {
-            throw "This LINK ID does not belong to you!"
+            throw "This LINK ID does not belong to you or does not exist!"
         }
     } catch (err) {
         console.log(err);

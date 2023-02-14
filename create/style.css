@@ -275,9 +275,9 @@
 .delete-options-div {
   display: none;
 }
-.download-div-note-info {
+/* .download-div-note-info {
   display: none;
-}
+} */
 
 .auth-div {
   background-color: hsla(214, 60%, 50%);
