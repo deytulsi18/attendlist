@@ -42,6 +42,20 @@
 
         <main>
             <h2>Create a New Link:</h2>
+            <div class="note-info" style="background-color: hsl(100, 71%, 73%);">
+                <span>
+                    <span style="font-weight: 800;">&#9917; NOTE &#9917; : </span>
+                    <br>
+                    <br>
+                    <span>&#9989; </span>You need to turn on your device <span
+                        style="color:hsl(0, 100%, 35%);">LOCATION</span>
+                    during attendance link creation.
+                    <!-- <br>
+                    <br>
+                    <span>&#9989; </span>After attendance link creation, you might turn off your device <span
+                        style="color:hsl(0, 100%, 35%);">LOCATION</span>. -->
+                </span>
+            </div>
             <div class="content">
 
                 <div class="create-link-btn-div">
@@ -86,9 +100,27 @@
                 </div>
             </div>
             <br>
-            <h2 style="font-size: 2rem;">OR</h2>
+            <h2 style="font-size: 2rem; font-weight: 700;">OR</h2>
             <br>
             <h2>Download a pre-exisiting attendance data :</h2>
+            <div class="note-info download-div-note-info">
+                <span>
+                    <span style="font-weight: 800;">&#9917; NOTE &#9917; : </span>
+                    <br>
+                    <br>
+                    <span>&#9989; </span> After the successful <span style="color:hsl(173, 100%, 21%);">DOWNLOAD</span>
+                    of attendance data make sure to <span style="color:hsl(0, 100%, 35%);">DELETE</span> the LINK ID.
+                    <br>
+                    <span style="background-color: hsl(62, 96%, 82%);">
+                        [click the <span style="color:hsl(0, 100%, 35%);">DELETE</span> button after attendance download]
+                    </span>
+
+                    <br>
+                    <br>
+                    <span>&#127919; </span>This is to ensure that no illegitimate
+                    or fake attendance can be recorded in the future.
+                </span>
+            </div>
             <div class="content">
                 <div class="download-btn-div">
                     <div class="download-details-div">
@@ -139,7 +171,7 @@
     <script src="
     https://cdn.jsdelivr.net/npm/iu-jspdf@1.3.4/dist/jspdf.debug.min.js
     "></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb-min.js"></script>
     <script src="/assets/js/config.js"></script>
     <script src="/assets/js/firebase-auth.js"></script>

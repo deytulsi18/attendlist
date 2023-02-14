@@ -1,3 +1,21 @@
+.note-info {
+  background-color: peachpuff;
+  background-color: hsl(30, 100%, 80%);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 5px dotted #000;
+  margin: 1rem auto;
+  max-width: 90vw;
+  width: 40rem;
+  height: fit-content;
+  margin-bottom: 1.5rem;
+}
+
+.note-info span {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
 .create-link-btn-div {
   display: flex;
   justify-content: center;
@@ -131,7 +149,7 @@
 
 .display-link-div span {
   font-family: "Montserrat";
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .display-link-div p {
@@ -196,7 +214,7 @@
 }
 
 .attendance-code-div p {
-  font-weight: 900;
+  font-weight: 600;
   font-size: 1.5rem;
 }
 
@@ -257,21 +275,21 @@
 .delete-options-div {
   display: none;
 }
+.download-div-note-info {
+  display: none;
+}
 
 .auth-div {
   background-color: hsla(214, 60%, 50%);
   background-color: hsla(180, 100%, 30%);
-  /* background-color: hsl(30, 100%, 80%); */
+  background-color: hsl(30, 100%, 80%);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
   padding-top: 1.5rem;
+  border-bottom: 1px solid #000;
 }
-
-/* .auth-status-div {
-
-} */
 
 .auth-status-img {
   display: flex;
@@ -287,7 +305,7 @@
 .auth-status-text {
   text-align: center;
   padding: 0.5rem 0;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .auth-btn {
@@ -301,6 +319,7 @@
   color: white;
   background-color: hsl(100, 100%, 30%);
   font-family: "Montserrat";
+  font-weight: 600;
   max-width: 30vw;
   cursor: pointer;
   margin-left: 1rem;

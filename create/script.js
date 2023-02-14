@@ -31,6 +31,7 @@ const downloadPDFBtn = document.querySelector("#download-pdf");
 const deleteBtn = document.querySelector("#delete-btn");
 const downloadOptionsDiv = document.querySelector(".download-options-div");
 const deleteOptionsDiv = document.querySelector(".delete-options-div");
+const downloadDivNoteInfo = document.querySelector(".download-div-note-info");
 const linkIdInput = document.querySelector("#link-id-input-box");
 
 downloadAttendanceBtn.addEventListener("click", () => {
@@ -152,6 +153,7 @@ let downloadAttendanceData = async (linkId) => {
             prepareDownload(res, linkId);
             downloadOptionsDiv.style.display = "flex";
             deleteOptionsDiv.style.display = "flex";
+            downloadDivNoteInfo.style.display = "flex";
             downloadAttendanceBtn.style.pointerEvents = "none";
             downloadAttendanceBtn.style.display = "none";
         }

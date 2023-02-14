@@ -1,7 +1,7 @@
 //****** firebase auth ******/
 
 let userIsSignedIn = false;
-let userEmail = ``;
+// let userEmail = ``;
 let userID = ``;
 
 firebase.initializeApp(firebaseConfig);
@@ -20,10 +20,10 @@ function toggleSignInWIthPopup() {
             }
             let user = result.user;
         }).catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            var email = error.email;
-            var credential = error.credential;
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            let email = error.email;
+            let credential = error.credential;
             if (errorCode === 'auth/account-exists-with-different-credential') {
                 alert('You have already signed up with a different auth provider for that email.');
             } else {
@@ -60,7 +60,7 @@ const initApp = () => {
             document.querySelector("#user-email").innerText = `${user.email}`;
 
             userIsSignedIn = true;
-            userEmail = `${user.email}`;
+            // userEmail = `${user.email}`;
             userID = `${user.uid}`;
         } else {
             createAttendanceLinkIDBtn.style.pointerEvents = 'auto';
@@ -72,7 +72,7 @@ const initApp = () => {
             document.querySelector("#user-avatar").src = `https://avatars.dicebear.com/api/gridy/random.svg`
 
             userIsSignedIn = false;
-            userEmail = ``;
+            // userEmail = ``;
         }
         document.getElementById('quickstart-sign-in').disabled = false;
     });
