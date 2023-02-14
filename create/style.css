@@ -280,8 +280,8 @@
 } */
 
 .auth-div {
-  background-color: hsla(214, 60%, 50%);
-  background-color: hsla(180, 100%, 30%);
+  /* background-color: hsla(214, 60%, 50%);
+  background-color: hsla(180, 100%, 30%); */
   background-color: hsl(30, 100%, 80%);
   display: flex;
   justify-content: space-between;
@@ -302,6 +302,7 @@
   background-color: #222;
   padding: 0.2rem;
 }
+
 .auth-status-text {
   text-align: center;
   padding: 0.5rem 0;
@@ -328,3 +329,55 @@
 .auth-btn:active {
   box-shadow: inset 1px 1px 10px 1px hsla(0, 0%, 0%, 50%);
 }
+
+.start-auth-div {
+  background-color: hsl(30, 100%, 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid #000;
+}
+
+.start-auth-btn {
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  width: 15rem;
+  text-align: center;
+  width: 20rem;
+  border: 2px solid black;
+  box-shadow: 1px 1px 10px 1px black;
+  border-radius: 10px;
+  color: white;
+  background-color: mediumslateblue;
+  font-family: "Montserrat";
+  font-weight: 600;
+  max-width: 50vw;
+  cursor: pointer;
+}
+
+.start-auth-btn:active {
+  box-shadow: inset 1px 1px 10px 1px hsla(0, 0%, 0%, 50%);
+}
+
+.auth-div {
+  display: none;
+}
+
+#google-icon {
+  max-width: 5rem;
+  max-height: 5rem;
+  margin-bottom: -5px;
+}
+
+#start-auth-btn-text {
+  line-height: 150%;
+}
+
+#google-icon-span {
+  background-color: white;
+  padding: 5px;
+  border-radius: 50%;
+  margin: 2px;
+}
+

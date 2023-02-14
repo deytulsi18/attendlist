@@ -34,14 +34,18 @@ const deleteOptionsDiv = document.querySelector(".delete-options-div");
 // const downloadDivNoteInfo = document.querySelector(".download-div-note-info");
 const linkIdInput = document.querySelector("#link-id-input-box");
 
+const startAuthDiv = document.querySelector('.start-auth-div');
+const AuthDiv = document.querySelector('.auth-div');
+const startAuthBtn = document.querySelector('#start-auth-btn');
+
 let userLatitude = 0;
 let userLongitude = 0;
 let userLocationDataFetched = false;
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        getLocation();
-    }, 500);
+startAuthBtn.addEventListener("click", () => {
+    getLocation();
+    startAuthDiv.style.display = "none";
+    AuthDiv.style.display = "flex";
 });
 
 downloadAttendanceBtn.addEventListener("click", () => {
