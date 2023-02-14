@@ -71,25 +71,34 @@ let submitAttendance = async () => {
             throw err;
         }
 
-        let timestamp = getTimeStamp();
+        const timestamp = getTimeStamp();
 
-        let userData = {
+        const deviceId = await getDeviceId();
+
+        const userData = {
             linkId: linkId,
             name: name,
             rollNo: rollNo,
             timestamp: timestamp.toString(),
             latitude: userLatitude,
-            longitude: userLongitude
+            longitude: userLongitude,
+            deviceId: deviceId
         };
 
-        let res = await fetchIndex('link_ids_by_link_id', linkId);
-        
-        if (res.name == 'NotFound') {
+        const requestedIndex = await fetchIndex('link_ids_by_link_id', linkId);
+
+        if (requestedIndex.name == 'NotFound') {
             throw `LINK ID does not exist!`;
         }
 
-        const hostLatitude = res.latitude;
-        const hostLongitude = res.longitude;
+        const requestedIndexForDeviceId = await fetchIndex(`${linkId}_by_device_id`, deviceId);
+
+        if (requestedIndexForDeviceId.name != 'NotFound') {
+            throw `You have already responded!`;
+        }
+
+        const hostLatitude = requestedIndex.latitude;
+        const hostLongitude = requestedIndex.longitude;
 
         const distanceBetweenUserAndHostInKM = distance(userLatitude, userLongitude, hostLatitude, hostLongitude, "K");
         const distanceBetweenUserAndHostInM = Math.round((distanceBetweenUserAndHostInKM * 1000) * 1000) / 1000;

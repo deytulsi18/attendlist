@@ -110,6 +110,7 @@ let generateLinkID = async () => {
 
         await createLinkID(generatedId);
         await addNewLinkIDWithUid(generatedId, userID, getTimeStamp(), userLatitude, userLongitude);
+        await createIndex(`${generatedId}_by_device_id`, generatedId, 'device_id');
 
         let linkId = generatedId;
         let attendanceLink = document.querySelector("#attendance-link");

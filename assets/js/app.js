@@ -36,7 +36,10 @@ const addAttendanceUnderLinkID = async (link_id, attendance_data) => {
                     // link_id: attendance_data.linkId,
                     name: attendance_data.name,
                     roll_no: attendance_data.rollNo,
-                    timestamp: attendance_data.timestamp
+                    timestamp: attendance_data.timestamp,
+                    // latitude: attendance_data.userLatitude,
+                    // longitude: attendance_data.userLongitude,
+                    device_id: attendance_data.deviceId
                 }
             }
         )
@@ -112,12 +115,27 @@ const fetchAttendanceUnderLinkID = async (link_id) => {
 }
 
 
-//
-const fetchIndex = async (indexName, link_id) => {
+const createIndex = async (indexName, indexSourceCollection, indexSearchParam) => {
+    await client.query(
+        q.CreateIndex(
+            {
+                name: indexName,
+                source: q.Collection(indexSourceCollection),
+                terms: [
+                    { field: ["data", indexSearchParam] },
+                ],
+            },
+        )
+    )
+        .catch((err) => console.error(err))
+}
+
+// get value from an index
+const fetchIndex = async (indexName, indexSearchParam) => {
     let res = await client.query(
         q.Get(q.Match(
             q.Index(indexName),
-            link_id
+            indexSearchParam
         ))
     )
         .then((ret) => ret.data)
