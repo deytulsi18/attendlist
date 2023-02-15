@@ -53,13 +53,14 @@ const addAttendanceUnderLinkID = async (link_id, attendance_data) => {
     // location.reload();
 }
 
-const addNewLinkIDWithUid = async (link_id, uid, timestamp, userLatitude, userLongitude) => {
+const addNewLinkIDWithUid = async (link_id, uid, email, timestamp, userLatitude, userLongitude) => {
     await client.query(
         q.Create(
             q.Collection(`link_ids`),
             {
                 data: {
                     link_id: link_id,
+                    email: email,
                     uid: uid,
                     timestamp: timestamp,
                     latitude: userLatitude,

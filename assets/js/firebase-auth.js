@@ -1,7 +1,7 @@
 //****** firebase auth ******/
 
 let userIsSignedIn = false;
-// let userEmail = ``;
+let userEmail = ``;
 let userID = ``;
 
 firebase.initializeApp(firebaseConfig);
@@ -60,7 +60,7 @@ const initAuth = () => {
             document.querySelector("#user-email").innerText = `${user.email}`;
 
             userIsSignedIn = true;
-            // userEmail = `${user.email}`;
+            userEmail = `${user.email}`;
             userID = `${user.uid}`;
         } else {
             createAttendanceLinkIDBtn.style.pointerEvents = 'auto';
@@ -72,7 +72,7 @@ const initAuth = () => {
             document.querySelector("#user-avatar").src = `https://avatars.dicebear.com/api/gridy/random.svg`
 
             userIsSignedIn = false;
-            // userEmail = ``;
+            userEmail = ``;
         }
         document.getElementById('quickstart-sign-in').disabled = false;
     });

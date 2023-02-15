@@ -381,3 +381,52 @@
   margin: 2px;
 }
 
+#whatsapp-icon {
+  max-width: 5rem;
+  max-height: 5rem;
+  margin-bottom: -5px;
+}
+
+#whatsapp-icon-div {
+  background-color: white;
+  /* background-color: hsl(142, 70%, 37%); */
+  border-radius: 20px;
+  margin-top: 0.5rem;
+}
+
+#whatsapp-icon-button {
+  background-color: hsl(142, 70%, 37%);
+  /* background-color: #111; */
+  padding: 15px;
+  border-radius: 20px;
+  margin: 2px;
+}
+
+/* #whatsapp-icon-button svg > .white {
+  fill: white;
+  fill: hsl(142, 70%, 37%);
+}
+#whatsapp-icon-button svg > .bg {
+  fill: hsl(142, 70%, 37%);
+  fill: #111;
+} */
+
+.attendance-share-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (min-width: 750px) {
+  .attendance-share-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+  #whatsapp-icon-div {
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+}

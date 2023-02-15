@@ -130,7 +130,7 @@ let generateLinkID = async () => {
         // console.log(userLongitude);
 
         await createLinkID(generatedId);
-        await addNewLinkIDWithUid(generatedId, userID, getTimeStamp(), userLatitude, userLongitude);
+        await addNewLinkIDWithUid(generatedId, userID, userEmail, getTimeStamp(), userLatitude, userLongitude);
         await createIndex(`${generatedId}_by_device_id`, generatedId, 'device_id');
 
         let linkId = generatedId;
@@ -140,10 +140,12 @@ let generateLinkID = async () => {
         let submitAttendancePageUrl = window.location + `submit/index.html?id=${linkId}`;
         submitAttendancePageUrl = String(submitAttendancePageUrl).replace('#', '');
         submitAttendancePageUrl = String(submitAttendancePageUrl).replace('create/', '');
+        const submitAttendancePageUrlWhatsapp = `https://wa.me/?text=${submitAttendancePageUrl}`;
 
         attendanceLink.innerText = submitAttendancePageUrl;
         attendanceLink.href = submitAttendancePageUrl;
         attendanceCode.innerText = linkId;
+        document.querySelector('#whatsapp-icon-button').href = submitAttendancePageUrlWhatsapp;
 
         let linkBox = document.querySelector('.display-link-div');
         linkBox.style.backgroundColor = `hsl(200, 100%, 40%)`;
