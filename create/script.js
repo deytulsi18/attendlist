@@ -126,8 +126,19 @@ let generateLinkID = async () => {
 
         let generatedId = number.toString();
 
-        // console.log(userLatitude);
-        // console.log(userLongitude);
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            showCloseButton: true,
+        })
+
+        Toast.fire({
+            icon: 'info',
+            title: 'LOADING \nPlease wait...'
+        });
 
         await createLinkID(generatedId);
         await addNewLinkIDWithUid(generatedId, userID, userEmail, getTimeStamp(), userLatitude, userLongitude);
@@ -180,6 +191,20 @@ let downloadAttendanceData = async (linkId) => {
         if (linkId == 'link_ids') {
             throw 'This LINK ID does not exist!';
         }
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            showCloseButton: true,
+        })
+
+        Toast.fire({
+            icon: 'info',
+            title: 'LOADING \nPlease wait...'
+        });
 
         const response = await fetchIndex('link_ids_by_link_id', linkId);
 
@@ -274,6 +299,20 @@ let deleteAttendanceData = async (linkId) => {
         if (linkId == 'link_ids') {
             throw 'This LINK ID does not exist!';
         }
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            showCloseButton: true,
+        })
+
+        Toast.fire({
+            icon: 'info',
+            title: 'LOADING \nPlease wait...'
+        });
 
         const response = await fetchIndex('link_ids_by_link_id', linkId);
 

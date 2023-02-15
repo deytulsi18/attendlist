@@ -80,6 +80,20 @@ let submitAttendance = async () => {
             throw err;
         }
 
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            showCloseButton: true,
+        })
+
+        Toast.fire({
+            icon: 'info',
+            title: 'LOADING \nPlease wait...'
+        });
+
         const timestamp = getTimeStamp();
 
         const deviceId = await getDeviceId();
